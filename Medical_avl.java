@@ -9,8 +9,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-import binaryTree.BinaryTree.Node;
-
 class Medicine {
 
 	Scanner scan = new Scanner(System.in);
@@ -637,6 +635,39 @@ public class Medical_avl {
 	// Calling inorder on root
 	void inorder_display() {
 		inorder_display(root);
+	}
+
+	Customer customer_order() {
+
+		Customer c = new Customer();
+		c.accept();
+
+		char ans;
+
+		System.out.println("Enter the medicines you want to purchase:");
+		do {
+			Purchased p = new Purchased();
+			p.accept();
+			Medicine m = search_name(root, p.medicine_name);
+			if (m != null) {
+				if (m.stock < p.quantity) {
+					System.out.println("Stock available is " + m.stock + " only");
+				} else
+					c.purchased.add(p);
+
+			}
+			System.out.println("Do you want to purchase more?");
+			ans = scan.next().charAt(0);
+		} while (ans == 'y' || ans == 'Y');
+
+		return c;
+	}
+
+	void search_byname(Medicine node) {
+		System.out.println("Enter the name of the medicine you want to search");
+		String name = scan.next();
+		Medicine med = search_name(node, name);
+		med.display();
 	}
 
 }
