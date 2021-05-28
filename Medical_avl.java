@@ -3,10 +3,13 @@ package miniProject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
+
+import binaryTree.BinaryTree.Node;
 
 class Medicine {
 
@@ -49,6 +52,19 @@ class Medicine {
 			ans = scan.next().charAt(0);
 
 		} while (ans == 'y' || ans == 'Y');
+
+		Collections.sort(diseases);
+	}
+
+	void display() {
+		System.out.println("Name: " + name);
+		System.out.println("Supplier name: " + supplier_name);
+		System.out.println("Price: " + price);
+		System.out.println("Stock: " + stock);
+		System.out.println("Location: " + location);
+		System.out.printf("%1$s %2$tB %2$td, %2$tY", "Expiry date:", expiry_date);
+		System.out.println("Diseases that can be cured: ");
+		System.out.println(diseases);
 	}
 }
 
@@ -200,7 +216,6 @@ public class Medical_avl {
 		String supplier_name;
 		int price;
 		int stock;
-		ArrayList<String> diseases[];
 		int location;
 		Date expiry_date;
 
@@ -219,7 +234,6 @@ public class Medical_avl {
 		// Stock
 		System.out.println("Enter the stock");
 		stock = scan.nextInt();
-
 
 		// location
 		System.out.println("Enter the location");
@@ -246,11 +260,13 @@ public class Medical_avl {
 				}
 			}
 		}
-		
+
 		Medicine node = new Medicine(name, supplier_name, price, stock, location, expiry_date);
 		node.accept_diseases();
 
 		root = insert(root, node);
+
+		scan.close();
 	}
 	// Time complexity: O(1)
 
@@ -301,6 +317,10 @@ public class Medical_avl {
 				node.stock = temp.stock;
 				node.location = temp.location;
 				node.expiry_date = temp.expiry_date;
+				node.diseases = new ArrayList<String>();
+				for (String dis : temp.diseases) {
+					node.diseases.add(dis);
+				}
 
 				// Delete the inorder successor
 				node.rightChild = deleteNode(node.rightChild, temp.name);
@@ -357,7 +377,7 @@ public class Medical_avl {
 	}
 	// Time complexity: O(h)...h is height if left subtree
 
-	Medicine search(Medicine node, String name) {
+	Medicine search_name(Medicine node, String name) {
 
 		if (node == null) {
 			System.out.println("Medicine  not found");
@@ -366,9 +386,9 @@ public class Medical_avl {
 			return node;
 
 		else if (node.name.compareTo(name) > 0) {
-			return search(node.leftChild, name);
+			return search_name(node.leftChild, name);
 		} else {
-			return search(node.rightChild, name);
+			return search_name(node.rightChild, name);
 		}
 
 	}
@@ -466,16 +486,157 @@ public class Medical_avl {
 		}
 	}
 
-	void restock(){
-        Medicine node;
-        System.out.print("Enter medicine to be restocked: ");
-        String name=scan.next();
-        System.out.print("Enter the quantity added: ");
-        int q=scan.nextInt();
-        node=search(root,name);
-        node.stock+=q;
-    }
-	
-	
+	void restock() {
+		Medicine node;
+		System.out.print("Enter medicine to be restocked: ");
+		String name = scan.next();
+		System.out.print("Enter the quantity added: ");
+		int q = scan.nextInt();
+
+		// expiry_date
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+		boolean flag = false;
+
+		Date expiry_date = null;
+
+		while (!flag) {
+			System.out.println("Enter expiry date of new stock (dd/mm/yy)");
+			String cinput = scan.nextLine();
+			if (null != cinput && cinput.trim().length() > 0) {
+				try {
+					expiry_date = format.parse(cinput);
+					flag = true;
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Enter valid date");
+				}
+			}
+		}
+		node = search_name(root, name);
+		node.stock += q;
+		node.expiry_date = expiry_date;
+
+		System.out.println("Do you want to restock more medicines?");
+		char ans = scan.next().charAt(0);
+
+		if (ans == 'y' || ans == 'Y')
+			restock();
+	}
+
+	void search_supplier_name(String supplier) {
+		Medicine ptr;
+		int count = 0;
+		// validation
+		if (root == null) {
+			System.out.println("store has no medicine!");
+		} else {
+			// implementation of queue using linked list
+			Queue<Medicine> queue = new LinkedList<>();
+			queue.add(root);
+			queue.add(null); // adding null to find end of a level
+
+			while (!queue.isEmpty()) {
+				ptr = queue.poll();
+				// if ptr is null that means we have added all next level nodes to queue so add
+				// another null
+				if (ptr == null) {
+					// if it is last level no need to add null in queue
+					if (!queue.isEmpty()) {
+						queue.add(null);
+					}
+				} else {
+					// add left child
+					if (ptr.leftChild != null) {
+						queue.add(ptr.leftChild);
+					}
+					// add right child
+					if (ptr.rightChild != null) {
+						queue.add(ptr.rightChild);
+					}
+					// print data whose stock is less
+					if (ptr.supplier_name.compareTo(supplier) == 0) {
+						count++;
+						System.out.println(count + "." + ptr.name + ":");
+						System.out.println("\tStock:" + ptr.stock);
+						System.out.println("\tSupplier:" + ptr.supplier_name);
+					}
+
+				}
+			}
+			System.out.println(count + "Medicines are supplied by " + supplier);
+		}
+	}
+
+	void search_disease(String disease) {
+		Medicine ptr;
+		int count = 0;
+		// validation
+		if (root == null) {
+			System.out.println("store has no medicine!");
+		} else {
+			// implementation of queue using linked list
+			Queue<Medicine> queue = new LinkedList<>();
+			queue.add(root);
+			queue.add(null); // adding null to find end of a level
+
+			while (!queue.isEmpty()) {
+				ptr = queue.poll();
+				// if ptr is null that means we have added all next level nodes to queue so add
+				// another null
+				if (ptr == null) {
+					// if it is last level no need to add null in queue
+					if (!queue.isEmpty()) {
+						queue.add(null);
+					}
+				} else {
+					// add left child
+					if (ptr.leftChild != null) {
+						queue.add(ptr.leftChild);
+					}
+					// add right child
+					if (ptr.rightChild != null) {
+						queue.add(ptr.rightChild);
+					}
+					// print data whose stock is less
+					if (ptr.diseases.contains(disease)) {
+						count++;
+						System.out.println(count + "." + ptr.name + ":");
+						System.out.println("\tStock:" + ptr.stock);
+						System.out.println("\track number:" + ptr.location);
+						System.out.println("\tSupplier:" + ptr.supplier_name);
+						System.out.println("\tDiseses that can be cured: ");
+						System.out.println("\t" + ptr.diseases);
+
+					}
+
+				}
+			}
+			System.out.println(count + "medicines can cure " + disease);
+
+		}
+	}
+
+	// Inorder
+	void inorder_display(Medicine y) {
+
+		// Return if tree is empty
+		if (y == null) {
+			return;
+		}
+
+		// Traverse left
+		inorder_display(y.leftChild);
+		// Print
+		y.display();
+		// Traverse right
+		inorder_display(y.rightChild);
+	}
+
+	// Calling inorder on root
+	void inorder_display() {
+		inorder_display(root);
+	}
 
 }
