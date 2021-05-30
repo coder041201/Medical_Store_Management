@@ -41,12 +41,11 @@ class Medicine {
 
 	void accept_diseases() {
 
-		
 		char ans;
 		do {
-			
+
 			System.out.println("Enter name of disease which can be cured by this medicines");
-			
+
 			diseases.add(scan.next());
 
 			System.out.println("Do you want to enter more diseases");
@@ -69,9 +68,10 @@ class Medicine {
 		System.out.println(diseases);
 	}
 }
-/**/
 
 public class Medical_avl {
+
+	static int count;
 
 	static final int MinimumStock = 10;
 
@@ -159,6 +159,7 @@ public class Medical_avl {
 
 		// Duplicate nodes not allowed
 		else {
+			count--;
 			System.out.println("This medicine is already present");
 			return node;
 		}
@@ -174,23 +175,17 @@ public class Medical_avl {
 		// If this Medicine becomes unbalanced, then there are 4 cases Left Left Case
 		if (balance > 1 && new_node.name.compareTo(node.leftChild.name) < 0) {
 
-			System.out.println("Right rotation done");
-
 			return rightRotate(node);
 		}
 
 		// Right Right Case
 		if (balance < -1 && new_node.name.compareTo(node.rightChild.name) > 0) {
 
-			System.out.println("Left rotation done");
-
 			return leftRotate(node);
 		}
 
 		// Left Right Case
 		if (balance > 1 && new_node.name.compareTo(node.leftChild.name) > 0) {
-
-			System.out.println("LR rotation done");
 
 			node.leftChild = leftRotate(node.leftChild);
 
@@ -199,8 +194,6 @@ public class Medical_avl {
 
 		// Right Left Case
 		if (balance < -1 && new_node.name.compareTo(node.rightChild.name) < 0) {
-
-			System.out.println("RL rotation done");
 
 			node.rightChild = rightRotate(node.rightChild);
 
@@ -214,7 +207,7 @@ public class Medical_avl {
 
 	// Accept general information form customer
 	void create() {
-		Scanner scan = new Scanner(System.in);
+
 		String name;
 		String supplier_name;
 		int price;
@@ -268,9 +261,9 @@ public class Medical_avl {
 		Medicine node = new Medicine(name, supplier_name, price, stock, location, expiry_date);
 		node.accept_diseases();
 
+		count++;
 		root = insert(root, node);
 
-		
 	}
 	// Time complexity: O(1)
 
@@ -294,7 +287,6 @@ public class Medical_avl {
 		// if key is same as root's key, then this is the node
 		// to be deleted
 		else {
-			
 
 			// node with only one child or no child
 			if ((node.leftChild == null) || (node.rightChild == null)) {
@@ -366,6 +358,7 @@ public class Medical_avl {
 			return leftRotate(node);
 		}
 
+		count--;
 		System.out.println("Medicine successfully removed from inventory");
 		System.out.println();
 		return node;
@@ -501,48 +494,53 @@ public class Medical_avl {
 		Medicine node;
 		System.out.print("Enter medicine to be restocked: ");
 		String name = scan.next();
-		System.out.print("Enter the quantity added: ");
-		int q = scan.nextInt();
 
-		// expiry_date
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
-		boolean flag = false;
-
-		Date expiry_date = null;
-
-		System.out.println("Enter expiry date of new stock (dd/mm/yy)");
-		while (!flag) {
-			
-			String cinput = scan.nextLine();
-			if (null != cinput && cinput.trim().length() > 0) {
-				try {
-					expiry_date = format.parse(cinput);
-					flag = true;
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					System.out.println("Enter valid date");
-				}
-			}
-		}
 		node = search_name(root, name);
-		if (node != null) {
-			node.stock += q;
-			node.expiry_date = expiry_date;
-		} else {
+
+		if (node == null) {
 			System.out.println("Do you want to add this medicine?");
 			char ans = scan.next().charAt(0);
 			if (ans == 'y' || ans == 'Y') {
 				create();
 			}
+		} else {
+
+			System.out.print("Enter the quantity added: ");
+			int q = scan.nextInt();
+
+			// expiry_date
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+			boolean flag = false;
+
+			Date expiry_date = null;
+
+			System.out.println("Enter expiry date of new stock (dd/mm/yyyy)");
+			while (!flag) {
+
+				String cinput = scan.nextLine();
+				if (null != cinput && cinput.trim().length() > 0) {
+					try {
+						expiry_date = format.parse(cinput);
+						flag = true;
+					} catch (ParseException e) {
+
+						e.printStackTrace();
+						System.out.println("Enter valid date");
+					}
+				}
+			}
+
+			node.stock += q;
+			node.expiry_date = expiry_date;
 
 		}
-
 		System.out.println("Do you want to restock more medicines?");
+
 		char ans = scan.next().charAt(0);
 
 		if (ans == 'y' || ans == 'Y')
+
 			restock();
 	}
 
@@ -660,6 +658,18 @@ public class Medical_avl {
 	void inorder_display() {
 		inorder_display(root);
 	}
+
+//	void inorder(Medicine y) {
+//		if (y == null) {
+//			return;
+//		}
+//		// Traverse left
+//		inorder_display(y.leftChild);
+//		
+//		
+//		// Traverse right
+//		inorder_display(y.rightChild);
+//	}
 
 	void customer_order(Customer c) {
 
