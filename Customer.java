@@ -9,6 +9,7 @@ class Purchased {
 	
 	String medicine_name;
 	int quantity;
+	int sell_price;
 	
 	void accept() {
 		System.out.print("Enter medicine name: ");
@@ -18,7 +19,7 @@ class Purchased {
 	}
 	
 	void display() {
-		System.out.println(medicine_name + ": " + quantity);
+		System.out.println(medicine_name + "\t" + quantity +"\t"+sell_price*quantity);
 	}
 }
 
@@ -65,15 +66,59 @@ public class Customer {
 		System.out.println("name: " + name);
 		System.out.println("contact number:" + contact_no);
 		System.out.println("Prescribed by:" + prescribed_by);
-		System.out.println("Medicines purchased: ");
-		for(Purchased p : purchased) {
-			p.display();
-		}
-		System.out.println("Total Bill:" + bill);
 	}
 	
-	void accept_order() {
-		
+	void create_customer_bill() {
+		bill=0; 
+		System.out.println("*********************************");
+		//tag line
+		System.out.println("Medicine/tQuantity/tPrice");
+		for(Purchased p : purchased) {
+			p.display();
+			bill+=p.sell_price*p.quantity;
+		}
+		System.out.println("Total Bill/t/t/t"+"Rs:"+total+"only");
+
 	}
+	void remove_medicine_from_bill() {
+		String med_name;
+		int flag = 0;
+		System.out.print("Enter medicine to remove: ");
+		med_name = sc.next();
+		for(Purchased p : purchased) {
+			if(p.medicine_name.equalsIgnoreCase( med_name)){
+				bill-=p.sell_price*p.quantity;
+				purchased.remove(p);
+				System.out.println("medicine removed from bill");
+				flag =1;
+				break;
+			}
+		}
+		if(flag == 0){
+			System.out.println("medicine not purchased");
+		}
+	}
+	void update_Quantity_of_medicine() {
+		String med_name;
+		int new_quantity;
+		int flag = 0;
+		System.out.print("Enter medicine whose quantity is to be updated: ");
+		med_name = sc.next();
+		for(Purchased p : purchased) {
+			if(p.medicine_name.equalsIgnoreCase( med_name)){
+				System.out.print("Enter new quantity: ");
+				new_quantity = sc.nextInt();
+				p.quantity = new_quantity;
+				bill+=p.sell_price*(new_quantity-p.quantity);
+				System.out.println("quantity updated Successfully");
+				flag =1;
+				break;
+			}
+		}
+		if(flag == 0){
+			System.out.println("medicine not purchased");
+		}
+	}
+
 	
 }

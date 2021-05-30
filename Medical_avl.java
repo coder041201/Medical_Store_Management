@@ -652,8 +652,11 @@ public class Medical_avl {
 			if (m != null) {
 				if (m.stock < p.quantity) {
 					System.out.println("Stock available is " + m.stock + " only");
-				} else
+				} else{
+					p.sell_price=m.price;
 					c.purchased.add(p);
+				}
+
 
 			}
 			System.out.println("Do you want to purchase more?");
