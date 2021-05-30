@@ -1,4 +1,4 @@
-package miniProject;
+package medical_Store_Management;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -513,8 +513,17 @@ public class Medical_avl {
 			}
 		}
 		node = search_name(root, name);
-		node.stock += q;
-		node.expiry_date = expiry_date;
+		if (node != null) {
+			node.stock += q;
+			node.expiry_date = expiry_date;
+		}else {
+			System.out.println("Do you want to add this medicine?");
+			char ans = scan.next().charAt(0);
+			if(ans=='y' || ans == 'Y') {
+				create();
+			}
+				
+		}
 
 		System.out.println("Do you want to restock more medicines?");
 		char ans = scan.next().charAt(0);
@@ -637,10 +646,9 @@ public class Medical_avl {
 		inorder_display(root);
 	}
 
-	Customer customer_order() {
+	void customer_order(Customer c) {
 
-		Customer c = new Customer();
-		c.accept();
+		
 
 		char ans;
 
@@ -652,25 +660,27 @@ public class Medical_avl {
 			if (m != null) {
 				if (m.stock < p.quantity) {
 					System.out.println("Stock available is " + m.stock + " only");
-				} else{
-					p.sell_price=m.price;
+				} else {
+					p.sell_price = m.price;
 					c.purchased.add(p);
 				}
-
 
 			}
 			System.out.println("Do you want to purchase more?");
 			ans = scan.next().charAt(0);
 		} while (ans == 'y' || ans == 'Y');
 
-		return c;
+		
 	}
 
 	void search_byname(Medicine node) {
+
 		System.out.println("Enter the name of the medicine you want to search");
 		String name = scan.next();
 		Medicine med = search_name(node, name);
-		med.display();
+
+		if (med != null)
+			med.display();
 	}
 
 }
