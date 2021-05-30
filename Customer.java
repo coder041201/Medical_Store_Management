@@ -1,4 +1,4 @@
-package miniProject;
+package medical_Store_Management;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -80,6 +80,7 @@ public class Customer {
 		System.out.println("Total Bill/t/t/t"+"Rs: "+bill+" only");
 
 	}
+	
 	void remove_medicine_from_bill() {
 		String med_name;
 		int flag = 0;
@@ -98,6 +99,7 @@ public class Customer {
 			System.out.println("medicine not purchased");
 		}
 	}
+	
 	void update_Quantity_of_medicine() {
 		String med_name;
 		int new_quantity;
