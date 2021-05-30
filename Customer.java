@@ -19,7 +19,7 @@ class Purchased {
 	}
 	
 	void display() {
-		System.out.println(medicine_name + "\t" + quantity +"\t"+sell_price*quantity);
+		System.out.println(medicine_name + "\t  " + quantity +"\t  "+sell_price*quantity);
 	}
 }
 
@@ -64,11 +64,15 @@ public class Customer {
 		name = sc.next();
 		System.out.print("Enter contact no.: ");
 		contact_no = sc.nextLong();
+		//sc.next();
 		System.out.println("Enter address");
+		sc.next();
 		address = sc.nextLine();
 		System.out.print("Enter name of doctor: ");
 		prescribed_by = sc.next();
 		System.out.println();
+		
+		purchased = new ArrayList<Purchased>();
 	}
 
 
@@ -85,12 +89,12 @@ public class Customer {
 		bill=0; 
 		System.out.println("*********************************");
 		//tag line
-		System.out.println("Medicine/tQuantity/tPrice");
+		System.out.println("Medicine\tQuantity\tPrice");
 		for(Purchased p : purchased) {
 			p.display();
 			bill+=p.sell_price*p.quantity;
 		}
-		System.out.println("Total Bill/t/t/t"+"Rs: "+bill+" only");
+		System.out.println("Total Bill\t\t\t "+"Rs: "+bill+" only");
 		System.out.println("*********************************");
 
 	}
