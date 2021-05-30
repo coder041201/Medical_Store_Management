@@ -41,9 +41,12 @@ class Medicine {
 
 	void accept_diseases() {
 
-		System.out.println("Enter name of diseases which can be cured by this medicines");
+		
 		char ans;
 		do {
+			
+			System.out.println("Enter name of disease which can be cured by this medicines");
+			
 			diseases.add(scan.next());
 
 			System.out.println("Do you want to enter more diseases");
@@ -60,11 +63,13 @@ class Medicine {
 		System.out.println("Price: " + price);
 		System.out.println("Stock: " + stock);
 		System.out.println("Location: " + location);
-		System.out.printf("%1$s %2$tB %2$td, %2$tY", "Expiry date:", expiry_date);
+		System.out.printf("%1$s %2$tB %2$td, %2$tY  ", "Expiry date:", expiry_date);
+		System.out.println();
 		System.out.println("Diseases that can be cured: ");
 		System.out.println(diseases);
 	}
 }
+/**/
 
 public class Medical_avl {
 
@@ -244,8 +249,9 @@ public class Medical_avl {
 
 		expiry_date = null;
 
+		System.out.print("Enter expiry date (dd/mm/yyyy): ");
 		while (!flag) {
-			System.out.println("Enter expiry date (dd/mm/yy):");
+
 			String cinput = scan.nextLine();
 			if (null != cinput && cinput.trim().length() > 0) {
 				try {
@@ -264,14 +270,16 @@ public class Medical_avl {
 
 		root = insert(root, node);
 
-		scan.close();
+		
 	}
 	// Time complexity: O(1)
 
 	Medicine deleteNode(Medicine node, String name) {
 		// PERFORM STANDARD BST DELETE
-		if (node == null)
+		if (node == null) {
+			System.out.println("Medicine to be deleted not found");
 			return node;
+		}
 
 		// If the key to be deleted is smaller than
 		// the root's key, then it lies in left subtree
@@ -286,6 +294,7 @@ public class Medical_avl {
 		// if key is same as root's key, then this is the node
 		// to be deleted
 		else {
+			
 
 			// node with only one child or no child
 			if ((node.leftChild == null) || (node.rightChild == null)) {
@@ -357,6 +366,8 @@ public class Medical_avl {
 			return leftRotate(node);
 		}
 
+		System.out.println("Medicine successfully removed from inventory");
+		System.out.println();
 		return node;
 	}
 
@@ -380,7 +391,7 @@ public class Medical_avl {
 		if (node == null) {
 			System.out.println("Medicine  not found");
 			return null;
-		} else if (node.name == name)
+		} else if (node.name.compareTo(name) == 0)
 			return node;
 
 		else if (node.name.compareTo(name) > 0) {
@@ -431,7 +442,8 @@ public class Medical_avl {
 
 				}
 			}
-			System.out.println(count + "medicines need to be restocked");
+			System.out.println();
+			System.out.println(count + " medicines need to be restocked");
 
 		}
 	}
@@ -479,7 +491,8 @@ public class Medical_avl {
 
 				}
 			}
-			System.out.println(count + "medicines are Expired");
+			System.out.println();
+			System.out.println(count + " medicines are Expired");
 
 		}
 	}
@@ -498,8 +511,9 @@ public class Medical_avl {
 
 		Date expiry_date = null;
 
+		System.out.println("Enter expiry date of new stock (dd/mm/yy)");
 		while (!flag) {
-			System.out.println("Enter expiry date of new stock (dd/mm/yy)");
+			
 			String cinput = scan.nextLine();
 			if (null != cinput && cinput.trim().length() > 0) {
 				try {
@@ -516,13 +530,13 @@ public class Medical_avl {
 		if (node != null) {
 			node.stock += q;
 			node.expiry_date = expiry_date;
-		}else {
+		} else {
 			System.out.println("Do you want to add this medicine?");
 			char ans = scan.next().charAt(0);
-			if(ans=='y' || ans == 'Y') {
+			if (ans == 'y' || ans == 'Y') {
 				create();
 			}
-				
+
 		}
 
 		System.out.println("Do you want to restock more medicines?");
@@ -572,7 +586,7 @@ public class Medical_avl {
 
 				}
 			}
-			System.out.println(count + "Medicines are supplied by " + supplier);
+			System.out.println(count + " medicines are supplied by " + supplier);
 		}
 	}
 
@@ -620,7 +634,7 @@ public class Medical_avl {
 
 				}
 			}
-			System.out.println(count + "medicines can cure " + disease);
+			System.out.println(count + " medicines can cure " + disease);
 
 		}
 	}
@@ -637,6 +651,7 @@ public class Medical_avl {
 		inorder_display(y.leftChild);
 		// Print
 		y.display();
+		System.out.println();
 		// Traverse right
 		inorder_display(y.rightChild);
 	}
@@ -647,8 +662,6 @@ public class Medical_avl {
 	}
 
 	void customer_order(Customer c) {
-
-		
 
 		char ans;
 
@@ -670,7 +683,6 @@ public class Medical_avl {
 			ans = scan.next().charAt(0);
 		} while (ans == 'y' || ans == 'Y');
 
-		
 	}
 
 	void search_byname(Medicine node) {
