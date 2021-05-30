@@ -77,7 +77,7 @@ public class Customer {
 			p.display();
 			bill+=p.sell_price*p.quantity;
 		}
-		System.out.println("Total Bill/t/t/t"+"Rs:"+total+"only");
+		System.out.println("Total Bill/t/t/t"+"Rs: "+bill+" only");
 
 	}
 	void remove_medicine_from_bill() {
