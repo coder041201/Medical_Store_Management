@@ -26,35 +26,46 @@ class Purchased {
 public class Customer {
 
 	Scanner sc = new Scanner(System.in);
+	
+	static String curr_id = "aaa";
 
 	String id;
 	String name;
 	Long contact_no;
 	String prescribed_by;
 	ArrayList<Purchased> purchased;
+	String address;
 	int bill;
 
 	Customer() {
 
 	}
 
-	Customer(String id, String name, Long contact_no, String prescribed_by, int bill) {
+	Customer(String id, String name, Long contact_no, String prescribed_by, int bill , String address) {
 
 		this.id = id;
 		this.name = name;
 		this.contact_no = contact_no;
 		this.prescribed_by = prescribed_by;
 		this.bill = bill;
+		this.address = address;
 
 	}
 
-	void accept() {
-		System.out.println("Enter Customer id");
-		id = sc.next();
+	void accept_customer() {
+		
+		id = curr_id;
+		
+		curr_id = (String)(curr_id + 1);
+		
+		System.out.println("Your customer id for this purchase is: " + id);
+//		id = sc.next();
 		System.out.print("Enter name: ");
 		name = sc.next();
 		System.out.print("Enter contact no.: ");
 		contact_no = sc.nextLong();
+		System.out.println("Enter address");
+		address = sc.nextLine();
 		System.out.print("Enter name of doctor: ");
 		prescribed_by = sc.next();
 		System.out.println();
@@ -62,13 +73,15 @@ public class Customer {
 
 
 	void display() {
-		System.out.println("customer id: " + id);
-		System.out.println("name: " + name);
-		System.out.println("contact number:" + contact_no);
+		System.out.println("Customer id: " + id);
+		System.out.println("Name: " + name);
+		System.out.println("Contact number:" + contact_no);
+		System.out.println("Customer address: " + address);
 		System.out.println("Prescribed by:" + prescribed_by);
 	}
 	
 	void create_customer_bill() {
+		
 		bill=0; 
 		System.out.println("*********************************");
 		//tag line
@@ -78,6 +91,7 @@ public class Customer {
 			bill+=p.sell_price*p.quantity;
 		}
 		System.out.println("Total Bill/t/t/t"+"Rs: "+bill+" only");
+		System.out.println("*********************************");
 
 	}
 	
