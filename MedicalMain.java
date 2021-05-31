@@ -15,15 +15,17 @@ public class MedicalMain {
 
 	static void writeToFile(Medical_avl medavl) {
 		try {
-			FileOutputStream f = new FileOutputStream(new File("medicineInventory.txt"));
+			FileOutputStream f = new FileOutputStream("MedicineInventory.txt");
 			ObjectOutputStream o = new ObjectOutputStream(f);
 
 			// Write objects to file
-			int c = Medical_avl.count;
+			int c = medavl.size();
 			o.writeInt(c);
 
 			if (medavl.root == null) {
 				System.out.println("No medicine present");
+				f.close();
+				o.close();
 				return;
 			}
 
@@ -41,7 +43,6 @@ public class MedicalMain {
 
 				// Printing leftmost node
 				ptr = s.pop();
-				ptr.display();
 				o.writeObject(ptr);
 
 				// Set ptr to right to traverse right tree
@@ -84,7 +85,7 @@ public class MedicalMain {
 
 	static void ReadFromFile(Medical_avl medavl) {
 		try {
-			FileInputStream finput = new FileInputStream(new File("medicineInventory.txt"));
+			FileInputStream finput = new FileInputStream("MedicineInventory.txt");
 			ObjectInputStream oinput = new ObjectInputStream(finput);
 
 			int length = oinput.readInt();
@@ -93,16 +94,12 @@ public class MedicalMain {
 			}
 			oinput.close();
 			finput.close();
-			medavl.inorder_display();
-//            for(int i=0;i<length;i++){
-//                record.get(i).display();
-//            }
+
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");
 		} catch (IOException e) {
 			System.out.println("Error initializing stream");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -118,13 +115,12 @@ public class MedicalMain {
 			}
 			oinput.close();
 			finput.close();
-			CustomerHash.displayTotalSales();
+			
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");
 		} catch (IOException e) {
 			System.out.println("Error initializing stream");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
