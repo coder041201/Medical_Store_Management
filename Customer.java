@@ -1,17 +1,20 @@
 package medical_Store_Management;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Purchased {
+class Purchased implements Serializable {
 	
-	Scanner sc = new Scanner(System.in); 
+	
 	
 	String medicine_name;
 	int quantity;
 	int sell_price;
 	
 	void accept() {
+		Scanner sc = new Scanner(System.in); 
+		
 		System.out.print("Enter medicine name: ");
 		medicine_name = sc.next();
 		System.out.print("Enter Quantity: ");
@@ -23,9 +26,9 @@ class Purchased {
 	}
 }
 
-public class Customer {
+public class Customer implements Serializable{
 
-	Scanner sc = new Scanner(System.in);
+	
 	
 	static String curr_id = "aaa";
 
@@ -53,6 +56,8 @@ public class Customer {
 	}
 
 	void accept_customer() {
+		
+		Scanner sc = new Scanner(System.in);
 		
 		id = curr_id;
 		
@@ -100,6 +105,9 @@ public class Customer {
 	}
 	
 	void remove_medicine_from_bill() {
+		
+		Scanner sc = new Scanner(System.in);
+		
 		String med_name;
 		int flag = 0;
 		System.out.print("Enter medicine to remove: ");
@@ -119,6 +127,9 @@ public class Customer {
 	}
 	
 	void update_Quantity_of_medicine() {
+		
+		Scanner sc = new Scanner(System.in);
+		
 		String med_name;
 		int new_quantity;
 		int flag = 0;
