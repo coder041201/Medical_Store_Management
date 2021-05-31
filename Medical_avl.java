@@ -1,5 +1,6 @@
 package medical_Store_Management;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,9 +10,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-class Medicine {
+class Medicine implements Serializable {
 
-	Scanner scan = new Scanner(System.in);
+
+	
 
 	String name;
 	String supplier_name;
@@ -40,6 +42,8 @@ class Medicine {
 	}
 
 	void accept_diseases() {
+		
+		Scanner scan = new Scanner(System.in);
 
 		char ans;
 		do {
@@ -71,7 +75,7 @@ class Medicine {
 
 public class Medical_avl {
 
-	static int count;
+	
 
 	static final int MinimumStock = 10;
 
@@ -159,7 +163,7 @@ public class Medical_avl {
 
 		// Duplicate nodes not allowed
 		else {
-			count--;
+			
 			System.out.println("This medicine is already present");
 			return node;
 		}
@@ -261,7 +265,6 @@ public class Medical_avl {
 		Medicine node = new Medicine(name, supplier_name, price, stock, location, expiry_date);
 		node.accept_diseases();
 
-		count++;
 		root = insert(root, node);
 
 	}
@@ -358,7 +361,6 @@ public class Medical_avl {
 			return leftRotate(node);
 		}
 
-		count--;
 		System.out.println("Medicine successfully removed from inventory");
 		System.out.println();
 		return node;
@@ -704,5 +706,19 @@ public class Medical_avl {
 		if (med != null)
 			med.display();
 	}
+	
+	int size()
+    {
+        return size(root);
+    }
+  
+    /* computes number of nodes in tree */
+    int size(Medicine node)
+    {
+        if (node == null)
+            return 0;
+        else
+            return(size(node.leftChild) + 1 + size(node.rightChild));
+    }
 
 }
