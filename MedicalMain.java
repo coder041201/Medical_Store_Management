@@ -18,9 +18,6 @@ public class MedicalMain {
 			FileOutputStream f = new FileOutputStream("MedicineInventory.txt");
 			ObjectOutputStream o = new ObjectOutputStream(f);
 
-			// Write objects to file
-			int c = medavl.size();
-			o.writeInt(c);
 
 			if (medavl.root == null) {
 				System.out.println("No medicine present");
@@ -29,28 +26,11 @@ public class MedicalMain {
 				return;
 			}
 
-			Stack<Medicine> s = new Stack<Medicine>();
+			o.writeObject(medavl.root);
 
-			// Traversing tree
-			Medicine ptr = medavl.root;
 
-			// Pushing left tree in stack
-			while (ptr != null || !s.empty()) {
-				while (ptr != null) {
-					s.push(ptr);
-					ptr = ptr.leftChild;
-				}
-
-				// Printing leftmost node
-				ptr = s.pop();
-				o.writeObject(ptr);
-
-				// Set ptr to right to traverse right tree
-				ptr = ptr.rightChild;
-			}
 			o.close();
 			f.close();
-			System.out.println("data written successfully");
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");
 		} catch (IOException e) {
@@ -64,6 +44,7 @@ public class MedicalMain {
 			ObjectOutputStream o = new ObjectOutputStream(f);
 
 			// Write objects to file
+			o.writeInt(CustomerHash.curr_id);
 			o.writeInt(CustomerHash.customerDatabase.size());
 
 			for (@SuppressWarnings("rawtypes")
@@ -75,7 +56,6 @@ public class MedicalMain {
 
 			o.close();
 			f.close();
-			System.out.println("data written successfully");
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");
 		} catch (IOException e) {
@@ -88,10 +68,10 @@ public class MedicalMain {
 			FileInputStream finput = new FileInputStream("MedicineInventory.txt");
 			ObjectInputStream oinput = new ObjectInputStream(finput);
 
-			int length = oinput.readInt();
-			for (int i = 0; i < length; i++) {
-				medavl.insert(medavl.root, (Medicine) oinput.readObject());
-			}
+			// int length = oinput.readInt();
+
+			medavl.root = medavl.insert(medavl.root, (Medicine) oinput.readObject());
+
 			oinput.close();
 			finput.close();
 
@@ -109,13 +89,14 @@ public class MedicalMain {
 			FileInputStream finput = new FileInputStream(new File("CustomerDetails.txt"));
 			ObjectInputStream oinput = new ObjectInputStream(finput);
 
+			CustomerHash.curr_id = oinput.readInt();
 			int length = oinput.readInt();
 			for (int i = 0; i < length; i++) {
 				CustomerHash.insert((Customer) oinput.readObject());
 			}
 			oinput.close();
 			finput.close();
-			
+
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");
 		} catch (IOException e) {
@@ -192,6 +173,8 @@ public class MedicalMain {
 						System.out.println("Enter name you want to delete:");
 						String name = sc.next();
 						medavl.deleteNode(medavl.root, name);
+						System.out.println("Medicine successfully removed from inventory");
+						System.out.println();
 					}
 						break;
 					case 10:
@@ -209,14 +192,17 @@ public class MedicalMain {
 
 			} else if (choice == 1) {
 				Customer new_customer = new Customer();
+				new_customer.accept_customer();
+				CustomerHash.insert(new_customer);
+
 				do {
 					System.out.println();
 					System.out.println("***Customer Menu***");
-					System.out.println("[1] Accept and Display the Details");
+					System.out.println("[1] Display the Details");
 					System.out.println("[2] Place order");
-					System.out.println("[3] Remove a medicine from the bill");
+					System.out.println("[3] Create bill");
 					System.out.println("[4] Update the quantity of a medicine");
-					System.out.println("[5] Display bill");
+					System.out.println("[5] Remove a medicine from the bill");
 					System.out.println("[6] Check out");
 					System.out.println();
 					System.out.println("Enter your choice.");
@@ -224,22 +210,19 @@ public class MedicalMain {
 
 					switch (ch) {
 					case 1:
-						new_customer.accept_customer();
-						// medavl.customer_order(new_customer);
 						new_customer.display();
-						CustomerHash.insert(new_customer);
 						break;
 					case 2:
 						medavl.customer_order(new_customer);
 						break;
 					case 3:
-						new_customer.remove_medicine_from_bill();
+						new_customer.create_customer_bill();
 						break;
 					case 4:
-						new_customer.update_Quantity_of_medicine();
+						new_customer.update_Quantity_of_medicine(medavl);
 						break;
 					case 5:
-						new_customer.create_customer_bill();
+						new_customer.remove_medicine_from_bill(medavl);
 						break;
 					case 6:
 						System.out.println("Thank You for Visiting our Store:)");
@@ -252,7 +235,7 @@ public class MedicalMain {
 				} while (ch != 6);
 
 			}
-		} while (choice ==0 || choice==1);
+		} while (choice == 0 || choice == 1);
 
 		sc.close();
 
