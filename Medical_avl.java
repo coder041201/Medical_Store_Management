@@ -392,22 +392,33 @@ public class Medical_avl {
 	}
 	// Time complexity: O(h)...h is height if left subtree
 
+	//Search medicine by its name
 	Medicine search_name(Medicine node, String name) {
 
+		//return if null
 		if (node == null) {
 			System.out.println("Medicine  not found");
 			return null;
-		} else if (node.name.compareTo(name) == 0)
+		}
+		
+		//return node when found
+		else if (node.name.compareTo(name) == 0)
 			return node;
 
+		//else recursively call search on
+		//left subtree is node to be searched is less
 		else if (node.name.compareTo(name) > 0) {
 			return search_name(node.leftChild, name);
-		} else {
+		}
+		
+		//else on right subtree
+		else {
 			return search_name(node.rightChild, name);
 		}
 
 	}
 
+	//To display out of stock medicines
 	void checkStock() {
 		Medicine ptr;
 		int count = 0;
@@ -415,11 +426,12 @@ public class Medical_avl {
 		if (root == null) {
 			System.out.println("store has no medicine!");
 		} else {
-			// implementation of queue using linked list
+			//implementation of queue using linked list
 			Queue<Medicine> queue = new LinkedList<>();
 			queue.add(root);
 			queue.add(null); // adding null to find end of a level
 
+			//traverse until queue isn't empty
 			while (!queue.isEmpty()) {
 				ptr = queue.poll();
 				// if ptr is null that means we have added all next level nodes to queue so add
@@ -441,19 +453,19 @@ public class Medical_avl {
 					// print data whose stock is less
 					if (ptr.stock < MinimumStock) {
 						count++;
-						System.out.println(count + "." + ptr.name + ":");
-						System.out.println("\tStock:" + ptr.stock);
-						System.out.println("\tSupplier:" + ptr.supplier_name);
+						
+						System.out.println(count + "." + ptr.name + ":");	  //name
+						System.out.println("\tStock:" + ptr.stock);		  //stock
+						System.out.println("\tSupplier:" + ptr.supplier_name);	  //supplier name
 					}
-
 				}
 			}
 			System.out.println();
 			System.out.println(count + " medicines need to be restocked");
-
 		}
 	}
 
+	//To display expired medicines
 	void checkExpiry() {
 		Medicine ptr;
 		int count = 0;
@@ -489,28 +501,31 @@ public class Medical_avl {
 					// print current data
 					if (ptr.expiry_date.before(currentDate)) {
 						count++;
-						System.out.println(count + "." + ptr.name + ":");
-						System.out.println("\tStock:" + ptr.stock);
-						System.out.println("\track number:" + ptr.location);
-						System.out.println("\tSupplier:" + ptr.supplier_name);
+						System.out.println(count + "." + ptr.name + ":");	  //name
+						System.out.println("\tStock:" + ptr.stock);		  //stock
+						System.out.println("\track number:" + ptr.location);	  //location
+						System.out.println("\tSupplier:" + ptr.supplier_name);	  //supplier name
 					}
-
 				}
 			}
 			System.out.println();
 			System.out.println(count + " medicines are Expired");
-
 		}
 	}
 
+	//Restocking medicines
 	void restock() {
 		Medicine node;
 		System.out.print("Enter medicine to be restocked: ");
 		String name = scan.next();
 
+		//get node 
 		node = search_name(root, name);
 
+		//if not present
 		if (node == null) {
+			
+			//give option to add
 			System.out.println("Do you want to add this medicine?");
 			char ans = scan.next().charAt(0);
 			if (ans == 'y' || ans == 'Y') {
@@ -518,6 +533,7 @@ public class Medical_avl {
 			}
 		} else {
 
+			//update stock
 			System.out.print("Enter the quantity added: ");
 			int q = scan.nextInt();
 
@@ -548,15 +564,15 @@ public class Medical_avl {
 			node.expiry_date = expiry_date;
 
 		}
+		
+		//ask for more
 		System.out.println("Do you want to restock more medicines?");
-
 		char ans = scan.next().charAt(0);
-
 		if (ans == 'y' || ans == 'Y')
-
 			restock();
 	}
 
+	//search by supplier
 	void search_supplier_name(String supplier) {
 		Medicine ptr;
 		int count = 0;
@@ -587,20 +603,20 @@ public class Medical_avl {
 					if (ptr.rightChild != null) {
 						queue.add(ptr.rightChild);
 					}
-					// print data whose stock is less
+					// print data of medicines provided by given supplier
 					if (ptr.supplier_name.compareTo(supplier) == 0) {
 						count++;
-						System.out.println(count + "." + ptr.name + ":");
-						System.out.println("\tStock:" + ptr.stock);
-						System.out.println("\tSupplier:" + ptr.supplier_name);
+						System.out.println(count + "." + ptr.name + ":");	  //name
+						System.out.println("\tStock:" + ptr.stock);		  //stock
+						System.out.println("\tSupplier:" + ptr.supplier_name);	  //supplier name
 					}
-
 				}
 			}
 			System.out.println(count + " medicines are supplied by " + supplier);
 		}
 	}
 
+	//search by disease
 	void search_disease(String disease) {
 		Medicine ptr;
 		int count = 0;
@@ -631,22 +647,20 @@ public class Medical_avl {
 					if (ptr.rightChild != null) {
 						queue.add(ptr.rightChild);
 					}
-					// print data whose stock is less
+					// print data of medicines which cure givn dis
 					if (ptr.diseases.contains(disease)) {
 						count++;
-						System.out.println(count + "." + ptr.name + ":");
-						System.out.println("\tStock:" + ptr.stock);
-						System.out.println("\track number:" + ptr.location);
-						System.out.println("\tSupplier:" + ptr.supplier_name);
-						System.out.println("\tDiseses that can be cured: ");
-						System.out.println("\t" + ptr.diseases);
+						System.out.println(count + "." + ptr.name + ":");	  //name
+						System.out.println("\tStock:" + ptr.stock);		  //stock
+						System.out.println("\track number:" + ptr.location);	  //location
+						System.out.println("\tSupplier:" + ptr.supplier_name);	  //supplier name
+						System.out.println("\tDiseses that can be cured: ");	  
+						System.out.println("\t" + ptr.diseases);		  //diseases that can be cured
 
 					}
-
 				}
 			}
 			System.out.println(count + " medicines can cure " + disease);
-
 		}
 	}
 
@@ -675,53 +689,53 @@ public class Medical_avl {
 		inorder_display(root);
 	}
 
-
-
+	//Customer placing order
 	void customer_order(Customer c) {
 
 		char ans;
-
 		System.out.println("Enter the medicines you want to purchase:");
 		do {
+			//create purchased obj
 			Purchased p = new Purchased();
+			
+			//accept its details
 			p.accept();
+			
+			//get that medicine
 			Medicine m = search_name(root, p.medicine_name);
+			
+			//check if present
 			if (m != null) {
+				
+				//check its stock
 				if (m.stock < p.quantity) {
 					System.out.println("Stock available is " + m.stock + " only");
 				} else {
+					//update its stock
 					m.stock = m.stock - p.quantity;
 					p.sell_price = m.price;
+					
+					//add to customer purchase list
 					c.purchased.add(p);
 				}
-
 			}
+			
+			//ask for more
 			System.out.println("Do you want to purchase more?");
 			ans = scan.next().charAt(0);
 		} while (ans == 'y' || ans == 'Y');
-
 	}
 
+	//search by name on root with parameters
 	void search_byname(Medicine node) {
 
+		//accept name
 		System.out.println("Enter the name of the medicine you want to search");
 		String name = scan.next();
+		
+		//search 
 		Medicine med = search_name(node, name);
-
 		if (med != null)
 			med.display();
 	}
-
-	int size() {
-		return size(root);
-	}
-
-	/* computes number of nodes in tree */
-	int size(Medicine node) {
-		if (node == null)
-			return 0;
-		else
-			return (size(node.leftChild) + 1 + size(node.rightChild));
-	}
-
 }
