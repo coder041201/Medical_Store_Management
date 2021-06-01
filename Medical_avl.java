@@ -1,4 +1,5 @@
 package medical_Store_Management;
+
 //importing all the java in-built packages needed
 import java.io.Serializable;
 import java.text.ParseException;
@@ -49,10 +50,10 @@ class Medicine implements Serializable {
 
 		char ans;
 		do {
-                        //takimg input one by one
+                        //taking input one by one
 			System.out.println("Enter name of disease which can be cured by this medicines");
-
 			diseases.add(scan.next());
+			
                         //asking if there are more diseases to be added to the list
 			System.out.println("Do you want to enter more diseases");
 			ans = scan.next().charAt(0);
@@ -80,10 +81,10 @@ class Medicine implements Serializable {
 //class for the avl tree implementation
 public class Medical_avl {
 
+	//Minimum stock to be kept
 	static final int MinimumStock = 10;
 
 	Scanner scan = new Scanner(System.in);
-
 	Medicine root;
         
 	//constructor
@@ -218,7 +219,7 @@ public class Medical_avl {
 	}
 	// Time complexity O(h)...h is height of tree
 
-	// Accept general information form customer
+	// Accept general information form user
 	void create() {
 
 		String name;
@@ -252,34 +253,37 @@ public class Medical_avl {
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
 		boolean flag = false;
-
 		expiry_date = null;
-
 		System.out.print("Enter expiry date (dd/mm/yyyy): ");
 		while (!flag) {
 
+			//input date
 			String cinput = scan.nextLine();
 			if (null != cinput && cinput.trim().length() > 0) {
 				try {
+					//Convert to date format
 					expiry_date = format.parse(cinput);
 					flag = true;
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					System.out.println("Enter valid date");
 				}
 			}
 		}
 
+		//Creating node
 		Medicine node = new Medicine(name, supplier_name, price, stock, location, expiry_date);
 		node.accept_diseases();
 
+		//Inserting to the root
 		root = insert(root, node);
 
 	}
 	// Time complexity: O(1)
 
+	//delete particular node
 	Medicine deleteNode(Medicine node, String name) {
+		
 		// PERFORM STANDARD BST DELETE
 		if (node == null) {
 			System.out.println("Medicine to be deleted not found");
