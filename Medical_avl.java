@@ -18,7 +18,7 @@ class Medicine implements Serializable {
 	String supplier_name;        //name of the supplier from whom the medicine is bought
 	int price;                   //price of the medicine per unit (example: price per tablet)
 	int stock;                   //stock of the mdicine available in the inventory
-	ArrayList<String> diseases;  //list of diseases which can be cured from the mdicine
+	ArrayList<String> diseases;  //list of diseases which can be cured from the medicine
 	int location;                //location of where the medicine is stored in the store (example: rack number)
 	Date expiry_date;            //expiry date of the medcine of the type Date from JCF
 
