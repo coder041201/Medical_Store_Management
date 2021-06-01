@@ -1,5 +1,5 @@
 package medical_Store_Management;
-
+//importing all the java in-built packages needed
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,20 +10,24 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-class Medicine implements Serializable {
+//Medicine implements Serializable as it will be used in File Organization and Handling
+class Medicine implements Serializable {  
 
-	String name;
-	String supplier_name;
-	int price;
-	int stock;
-	ArrayList<String> diseases;
-	int location;
-	Date expiry_date;
+	//Paramneters for a medicine
+	String name;                 //name of the medicine
+	String supplier_name;        //name of the supplier from whom the medicine is bought
+	int price;                   //price of the medicine per unit (example: price per tablet)
+	int stock;                   //stock of the mdicine available in the inventory
+	ArrayList<String> diseases;  //list of diseases which can be cured from the mdicine
+	int location;                //location of where the medicine is stored in the store (example: rack number)
+	Date expiry_date;            //expiry date of the medcine of the type Date from JCF
 
-	Medicine leftChild;
+	//parameters of the tree 
+	Medicine leftChild;         
 	Medicine rightChild;
 	int height;
-
+        
+	//parameterized constructor
 	Medicine(String name, String supplier_name, int price, int stock, int location, Date expiry_date) {
 
 		this.name = name;
@@ -37,26 +41,29 @@ class Medicine implements Serializable {
 		leftChild = rightChild = null;
 		height = 1;
 	}
-
+        
+	//method to accept the diseases cured by the medicine
 	void accept_diseases() {
 
 		Scanner scan = new Scanner(System.in);
 
 		char ans;
 		do {
-
+                        //takimg input one by one
 			System.out.println("Enter name of disease which can be cured by this medicines");
 
 			diseases.add(scan.next());
-
+                        //asking if there are more diseases to be added to the list
 			System.out.println("Do you want to enter more diseases");
 			ans = scan.next().charAt(0);
-
-		} while (ans == 'y' || ans == 'Y');
-
+                
+		//continue the loop as lomg as user wants to add more
+		} while (ans == 'y' || ans == 'Y');  
+                
 		Collections.sort(diseases);
 	}
-
+        
+	//method to display the medicine details 
 	void display() {
 		System.out.println("Name: " + name);
 		System.out.println("Supplier name: " + supplier_name);
@@ -70,6 +77,7 @@ class Medicine implements Serializable {
 	}
 }
 
+//class for the avl tree implementation
 public class Medical_avl {
 
 	static final int MinimumStock = 10;
@@ -77,11 +85,13 @@ public class Medical_avl {
 	Scanner scan = new Scanner(System.in);
 
 	Medicine root;
-
+        
+	//constructor
 	Medical_avl() {
 		root = null;
 	}
-
+        
+	//finding the height of the medicine node
 	int height(Medicine Medicine) {
 
 		// Return 0 if Medicine is null
@@ -94,7 +104,8 @@ public class Medical_avl {
 		}
 	}
 	// Time complexity O(h)...h is height of tree
-
+        
+	//method to calculate the balance factor used in balancing of the avl tree
 	int balance_factor(Medicine Medicine) {
 
 		// Return 0 if Medicine is null
@@ -105,7 +116,9 @@ public class Medical_avl {
 		return height(Medicine.leftChild) - height(Medicine.rightChild);
 	}
 	// Time complexity O(h)...h is height of tree
-
+        
+	
+	//method to perform right rotation
 	Medicine rightRotate(Medicine parent) {
 		Medicine new_parent = parent.leftChild;
 		Medicine new_leftChild = new_parent.rightChild;
@@ -123,6 +136,7 @@ public class Medical_avl {
 	}
 	// Time complexity O(1)
 
+	//method to perform left rotation
 	Medicine leftRotate(Medicine parent) {
 		Medicine new_parent = parent.rightChild;
 		Medicine new_leftChild = new_parent.leftChild;
@@ -139,7 +153,8 @@ public class Medical_avl {
 		return new_parent;
 	}
 	// Time complexity O(1)
-
+        
+	//method to insert a new medicine node in the tree
 	Medicine insert(Medicine node, Medicine new_node) {
 
 		// Perform the normal BST insertion
@@ -156,7 +171,7 @@ public class Medical_avl {
 			// recursively calling insert
 			node.rightChild = insert(node.rightChild, new_node);
 
-		// Duplicate nodes not allowed
+		// Duplicate nodes are not allowed
 		else {
 
 			System.out.println("This medicine is already present");
@@ -171,7 +186,8 @@ public class Medical_avl {
 		// became unbalanced
 		int balance = balance_factor(node);
 
-		// If this Medicine becomes unbalanced, then there are 4 cases Left Left Case
+		// If this Medicine becomes unbalanced, then there are 4 cases 
+		//Left Left Case
 		if (balance > 1 && new_node.name.compareTo(node.leftChild.name) < 0) {
 
 			return rightRotate(node);
