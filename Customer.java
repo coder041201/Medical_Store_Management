@@ -4,33 +4,31 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//Purchased class
 class Purchased implements Serializable {
-	
-	
 	
 	String medicine_name;
 	int quantity;
 	int sell_price;
 	
+	//accepting details
 	void accept() {
-		Scanner sc = new Scanner(System.in); 
 		
-		System.out.print("Enter medicine name: ");
-		medicine_name = sc.next();
-		System.out.print("Enter Quantity: ");
+		Scanner sc = new Scanner(System.in); 
+		System.out.print("Enter medicine name: ");	//name
+		medicine_name = sc.next();			
+		System.out.print("Enter Quantity: ");		//quantity
 		quantity = sc.nextInt();
 	}
 	
+	//display details of purchased item
 	void display() {
 		System.out.println(medicine_name + "\t  " + quantity + "\t\t" +sell_price*quantity);
 	}
 }
 
+//Customer class
 public class Customer implements Serializable{
-
-	
-	
-	
 
 	int id;
 	String name;
@@ -40,10 +38,10 @@ public class Customer implements Serializable{
 	String address;
 	int bill;
 
-	Customer() {
+	//default custructor
+	Customer() {}
 
-	}
-
+	//Parametarize constructor
 	Customer(int id, String name, Long contact_no, String prescribed_by, int bill , String address) {
 
 		this.id = id;
@@ -55,30 +53,32 @@ public class Customer implements Serializable{
 
 	}
 
+	//accepting cutomer details
 	void accept_customer() {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		id = CustomerHash.curr_id;
+		id = CustomerHash.curr_id;	//id
 		
-		CustomerHash.curr_id ++;
+		CustomerHash.curr_id ++;	//updating id
 		
 		System.out.println("Your customer id for this purchase is: " + id);
-		System.out.print("Enter name: ");
+		System.out.print("Enter name: ");		//name
 		name = sc.next();
-		System.out.print("Enter contact no.: ");
+		System.out.print("Enter contact no.: ");	//contact no.
 		contact_no = sc.nextLong();
-		System.out.println("Enter address");
+		System.out.println("Enter address");		//address
 		sc.next();
 		address = sc.nextLine();
-		System.out.print("Enter name of doctor: ");
+		System.out.print("Enter name of doctor: ");	//dr. name
 		prescribed_by = sc.next();
 		System.out.println();
 		
+		//initialize purchased arraylist
 		purchased = new ArrayList<Purchased>();
 	}
 
-
+	//displaying customer details
 	void display() {
 		System.out.println("Customer id: " + id);
 		System.out.println("Name: " + name);
@@ -87,12 +87,15 @@ public class Customer implements Serializable{
 		System.out.println("Prescribed by:" + prescribed_by);
 	}
 	
+	//Creating bill
 	void create_customer_bill() {
 		
 		bill=0; 
 		System.out.println("*********************************");
 		//tag line
 		System.out.println("Medicine\tQuantity\tPrice");
+		
+		//displaying each item of purchased list
 		for(Purchased p : purchased) {
 			p.display();
 			bill+=p.sell_price*p.quantity;
@@ -102,6 +105,7 @@ public class Customer implements Serializable{
 
 	}
 	
+	//removing medicine from bill
 	void remove_medicine_from_bill(Medical_avl root) {
 		
 		Scanner sc = new Scanner(System.in);
@@ -110,11 +114,21 @@ public class Customer implements Serializable{
 		int flag = 0;
 		System.out.print("Enter medicine to remove: ");
 		med_name = sc.next();
+		
+		//get medicine
 		Medicine node = root.search_name(root.root, med_name);
 		for(Purchased p : purchased) {
+			
+			//search in purchase
 			if(p.medicine_name.equalsIgnoreCase( med_name)){
+				
+				//update bill
 				bill-=p.sell_price*p.quantity;
+				
+				//update stock
 				node.stock = node.stock + p.quantity;
+				
+				//remove from purchase
 				purchased.remove(p);
 				System.out.println("medicine removed from bill");
 				flag =1;
@@ -126,6 +140,7 @@ public class Customer implements Serializable{
 		}
 	}
 	
+	//update quantity
 	void update_Quantity_of_medicine(Medical_avl root) {
 		
 		Scanner sc = new Scanner(System.in);
@@ -135,11 +150,19 @@ public class Customer implements Serializable{
 		int flag = 0;
 		System.out.print("Enter medicine whose quantity is to be updated: ");
 		med_name = sc.next();
+		
+		//get medicine
 		Medicine node = root.search_name(root.root, med_name);
 		for(Purchased p : purchased) {
+			
+			//search in purchase
 			if(p.medicine_name.equalsIgnoreCase( med_name)){
+				
+				//update bill
 				System.out.print("Enter new quantity: ");
 				new_quantity = sc.nextInt();
+				
+				//update medicine sock
 				node.stock = node.stock + p.quantity - new_quantity;
 				p.quantity = new_quantity;
 				bill+=p.sell_price*(new_quantity-p.quantity);
@@ -152,6 +175,4 @@ public class Customer implements Serializable{
 			System.out.println("medicine not purchased");
 		}
 	}
-
-	
 }
