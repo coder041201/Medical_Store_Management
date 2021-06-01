@@ -12,9 +12,6 @@ import java.util.Scanner;
 
 class Medicine implements Serializable {
 
-
-	
-
 	String name;
 	String supplier_name;
 	int price;
@@ -42,7 +39,7 @@ class Medicine implements Serializable {
 	}
 
 	void accept_diseases() {
-		
+
 		Scanner scan = new Scanner(System.in);
 
 		char ans;
@@ -74,8 +71,6 @@ class Medicine implements Serializable {
 }
 
 public class Medical_avl {
-
-	
 
 	static final int MinimumStock = 10;
 
@@ -163,7 +158,7 @@ public class Medical_avl {
 
 		// Duplicate nodes not allowed
 		else {
-			
+
 			System.out.println("This medicine is already present");
 			return node;
 		}
@@ -192,7 +187,6 @@ public class Medical_avl {
 		if (balance > 1 && new_node.name.compareTo(node.leftChild.name) > 0) {
 
 			node.leftChild = leftRotate(node.leftChild);
-
 			return rightRotate(node);
 		}
 
@@ -200,7 +194,6 @@ public class Medical_avl {
 		if (balance < -1 && new_node.name.compareTo(node.rightChild.name) < 0) {
 
 			node.rightChild = rightRotate(node.rightChild);
-
 			return leftRotate(node);
 		}
 
@@ -361,8 +354,6 @@ public class Medical_avl {
 			return leftRotate(node);
 		}
 
-		System.out.println("Medicine successfully removed from inventory");
-		System.out.println();
 		return node;
 	}
 
@@ -658,20 +649,13 @@ public class Medical_avl {
 
 	// Calling inorder on root
 	void inorder_display() {
+		if (root == null) {
+			System.out.println("No medicines in store");
+		}
 		inorder_display(root);
 	}
 
-//	void inorder(Medicine y) {
-//		if (y == null) {
-//			return;
-//		}
-//		// Traverse left
-//		inorder_display(y.leftChild);
-//		
-//		
-//		// Traverse right
-//		inorder_display(y.rightChild);
-//	}
+
 
 	void customer_order(Customer c) {
 
@@ -686,6 +670,7 @@ public class Medical_avl {
 				if (m.stock < p.quantity) {
 					System.out.println("Stock available is " + m.stock + " only");
 				} else {
+					m.stock = m.stock - p.quantity;
 					p.sell_price = m.price;
 					c.purchased.add(p);
 				}
@@ -706,19 +691,17 @@ public class Medical_avl {
 		if (med != null)
 			med.display();
 	}
-	
-	int size()
-    {
-        return size(root);
-    }
-  
-    /* computes number of nodes in tree */
-    int size(Medicine node)
-    {
-        if (node == null)
-            return 0;
-        else
-            return(size(node.leftChild) + 1 + size(node.rightChild));
-    }
+
+	int size() {
+		return size(root);
+	}
+
+	/* computes number of nodes in tree */
+	int size(Medicine node) {
+		if (node == null)
+			return 0;
+		else
+			return (size(node.leftChild) + 1 + size(node.rightChild));
+	}
 
 }
