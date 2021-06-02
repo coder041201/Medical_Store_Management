@@ -38,8 +38,4 @@ public class CustomerHash {
         }
 		System.out.println("Total revenue generated: (Rs.)" + sales);
 	}
-	
-	
-	
-	
 }
