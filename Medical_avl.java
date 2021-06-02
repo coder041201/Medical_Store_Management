@@ -531,6 +531,65 @@ public class Medical_avl {
 		}
 	}
 
+	// Restocking medicines
+	void restock() {
+		Medicine node;
+		System.out.print("Enter medicine to be restocked: ");
+		String name = scan.next();
+
+		// get node
+		node = search_name(root, name);
+
+		// if not present
+		if (node == null) {
+
+			// give option to add
+			System.out.println("Do you want to add this medicine?");
+			char ans = scan.next().charAt(0);
+			if (ans == 'y' || ans == 'Y') {
+				create();
+			}
+		} else {
+
+			// update stock
+			System.out.print("Enter the quantity added: ");
+			int q = scan.nextInt();
+
+			// expiry_date
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+			boolean flag = false;
+
+			Date expiry_date = null;
+
+			System.out.println("Enter expiry date of new stock (dd/mm/yyyy)");
+			while (!flag) {
+
+				String cinput = scan.nextLine();
+				if (null != cinput && cinput.trim().length() > 0) {
+					try {
+						expiry_date = format.parse(cinput);
+						flag = true;
+					} catch (ParseException e) {
+
+						e.printStackTrace();
+						System.out.println("Enter valid date");
+					}
+				}
+			}
+
+			node.stock += q;
+			node.expiry_date = expiry_date;
+
+		}
+
+		// ask for more
+		System.out.println("Do you want to restock more medicines?");
+		char ans = scan.next().charAt(0);
+		if (ans == 'y' || ans == 'Y')
+			restock();
+	}
+
 	// delete particular node
 	Medicine deleteNode(Medicine node, String name) {
 
@@ -628,7 +687,7 @@ public class Medical_avl {
 	}
 
 	// Finding minimum node
-	Medicine min(Medicine node) {
+	private Medicine min(Medicine node) {
 
 		Medicine ptr = node;
 
@@ -641,65 +700,6 @@ public class Medical_avl {
 		return ptr;
 	}
 	// Time complexity: O(h)...h is height if left subtree
-
-	// Restocking medicines
-	void restock() {
-		Medicine node;
-		System.out.print("Enter medicine to be restocked: ");
-		String name = scan.next();
-
-		// get node
-		node = search_name(root, name);
-
-		// if not present
-		if (node == null) {
-
-			// give option to add
-			System.out.println("Do you want to add this medicine?");
-			char ans = scan.next().charAt(0);
-			if (ans == 'y' || ans == 'Y') {
-				create();
-			}
-		} else {
-
-			// update stock
-			System.out.print("Enter the quantity added: ");
-			int q = scan.nextInt();
-
-			// expiry_date
-			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
-			boolean flag = false;
-
-			Date expiry_date = null;
-
-			System.out.println("Enter expiry date of new stock (dd/mm/yyyy)");
-			while (!flag) {
-
-				String cinput = scan.nextLine();
-				if (null != cinput && cinput.trim().length() > 0) {
-					try {
-						expiry_date = format.parse(cinput);
-						flag = true;
-					} catch (ParseException e) {
-
-						e.printStackTrace();
-						System.out.println("Enter valid date");
-					}
-				}
-			}
-
-			node.stock += q;
-			node.expiry_date = expiry_date;
-
-		}
-
-		// ask for more
-		System.out.println("Do you want to restock more medicines?");
-		char ans = scan.next().charAt(0);
-		if (ans == 'y' || ans == 'Y')
-			restock();
-	}
 
 	// Customer placing order
 	void customer_order(Customer c) {
