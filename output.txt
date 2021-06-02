@@ -1,0 +1,658 @@
+#Output on interactive console
+
+Choose 0 if you are the Admin. 
+Choose 1 if you are a Customer.
+Enter anything else to EXIT.
+0
+-----------------MENU-----------------
+[1] Add a new Medicine
+[2] Display the Inventory
+[3] Check the Stock of a medicine
+[4] Check the Expiry Date of a medicine in stock
+[5] Search a medicine by Name
+[6] Search a medicine by Disease for which the medicine is required
+[7] Search the medicine by the Supplier Name
+[8] Restock a Medicine
+[9] Remove a Medicine from the Inventory
+[10] Display total sales
+[11] Exit the Menu
+Enter your choice.
+1
+Enter the name:
+faviparavir
+Enter the supplier
+sup3
+Enter the price per unit
+34
+Enter the stock
+19
+Enter the location
+15
+Enter expiry date (dd/mm/yyyy): 12/12/2020
+Enter name of disease which can be cured by this medicines
+dis1
+Do you want to enter more diseases
+y
+Enter name of disease which can be cured by this medicines
+dis2
+Do you want to enter more diseases
+y
+Enter name of disease which can be cured by this medicines
+dis3
+Do you want to enter more diseases
+n
+-----------------MENU-----------------
+[1] Add a new Medicine
+[2] Display the Inventory
+[3] Check the Stock of a medicine
+[4] Check the Expiry Date of a medicine in stock
+[5] Search a medicine by Name
+[6] Search a medicine by Disease for which the medicine is required
+[7] Search the medicine by the Supplier Name
+[8] Restock a Medicine
+[9] Remove a Medicine from the Inventory
+[10] Display total sales
+[11] Exit the Menu
+Enter your choice.
+2
+Name: VitaminC
+Supplier name: sup3
+Price: 3
+Stock: 94
+Location: 6
+Expiry date: June 22, 2022  
+Diseases that can be cured: 
+[dis1, dis4]
+
+Name: VitaminD
+Supplier name: sup3
+Price: 10
+Stock: 7
+Location: 7
+Expiry date: April 23, 2023  
+Diseases that can be cured: 
+[dis1, jointpain]
+
+Name: azee
+Supplier name: sup2
+Price: 56
+Stock: 100
+Location: 10
+Expiry date: September 21, 2022  
+Diseases that can be cured: 
+[dis1, dis2]
+
+Name: doxycyline100
+Supplier name: sup2
+Price: 34
+Stock: 89
+Location: 9
+Expiry date: July 12, 2023  
+Diseases that can be cured: 
+[dis1, dis3]
+
+Name: ecospirin
+Supplier name: sup3
+Price: 10
+Stock: 74
+Location: 4
+Expiry date: April 12, 2021  
+Diseases that can be cured: 
+[dis1, dis4]
+
+Name: fabiflue400
+Supplier name: sup2
+Price: 45
+Stock: 120
+Location: 5
+Expiry date: December 31, 2024  
+Diseases that can be cured: 
+[Cold, Corona, Fever, dis1]
+
+Name: faviparavir
+Supplier name: sup3
+Price: 34
+Stock: 19
+Location: 15
+Expiry date: December 12, 2020  
+Diseases that can be cured: 
+[dis1, dis2, dis3]
+
+Name: iverfast
+Supplier name: sup2
+Price: 55
+Stock: 80
+Location: 8
+Expiry date: December 31, 2021  
+Diseases that can be cured: 
+[Diarrhoea, dis3]
+
+Name: paracetamol
+Supplier name: sup1
+Price: 35
+Stock: 80
+Location: 10
+Expiry date: December 12, 2022  
+Diseases that can be cured: 
+[dis1, dis2]
+
+Name: sinarest
+Supplier name: sup1
+Price: 20
+Stock: 90
+Location: 2
+Expiry date: December 22, 2023  
+Diseases that can be cured: 
+[dis1, dis3]
+
+Name: tezar45
+Supplier name: sup1
+Price: 67
+Stock: 89
+Location: 13
+Expiry date: December 12, 2023  
+Diseases that can be cured: 
+[dis2]
+
+-----------------MENU-----------------
+[1] Add a new Medicine
+[2] Display the Inventory
+[3] Check the Stock of a medicine
+[4] Check the Expiry Date of a medicine in stock
+[5] Search a medicine by Name
+[6] Search a medicine by Disease for which the medicine is required
+[7] Search the medicine by the Supplier Name
+[8] Restock a Medicine
+[9] Remove a Medicine from the Inventory
+[10] Display total sales
+[11] Exit the Menu
+Enter your choice.
+3
+1.VitaminD:
+	Stock:7
+	Supplier:sup3
+
+1 medicines need to be restocked
+-----------------MENU-----------------
+[1] Add a new Medicine
+[2] Display the Inventory
+[3] Check the Stock of a medicine
+[4] Check the Expiry Date of a medicine in stock
+[5] Search a medicine by Name
+[6] Search a medicine by Disease for which the medicine is required
+[7] Search the medicine by the Supplier Name
+[8] Restock a Medicine
+[9] Remove a Medicine from the Inventory
+[10] Display total sales
+[11] Exit the Menu
+Enter your choice.
+4
+1.ecospirin:
+	Stock:74
+	rack number:4
+	Supplier:sup3
+2.faviparavir:
+	Stock:19
+	rack number:15
+	Supplier:sup3
+
+2 medicines are Expired
+-----------------MENU-----------------
+[1] Add a new Medicine
+[2] Display the Inventory
+[3] Check the Stock of a medicine
+[4] Check the Expiry Date of a medicine in stock
+[5] Search a medicine by Name
+[6] Search a medicine by Disease for which the medicine is required
+[7] Search the medicine by the Supplier Name
+[8] Restock a Medicine
+[9] Remove a Medicine from the Inventory
+[10] Display total sales
+[11] Exit the Menu
+Enter your choice.
+5
+Enter the name of the medicine you want to search
+paracetamol
+Name: paracetamol
+Supplier name: sup1
+Price: 35
+Stock: 80
+Location: 10
+Expiry date: December 12, 2022  
+Diseases that can be cured: 
+[dis1, dis2]
+-----------------MENU-----------------
+[1] Add a new Medicine
+[2] Display the Inventory
+[3] Check the Stock of a medicine
+[4] Check the Expiry Date of a medicine in stock
+[5] Search a medicine by Name
+[6] Search a medicine by Disease for which the medicine is required
+[7] Search the medicine by the Supplier Name
+[8] Restock a Medicine
+[9] Remove a Medicine from the Inventory
+[10] Display total sales
+[11] Exit the Menu
+Enter your choice.
+6
+Enter disease you want to search the medicine for:
+dis1
+1.ecospirin:
+	Stock:74
+	rack number:4
+	Supplier:sup3
+	Diseses that can be cured: 
+	[dis1, dis4]
+2.VitaminD:
+	Stock:7
+	rack number:7
+	Supplier:sup3
+	Diseses that can be cured: 
+	[dis1, jointpain]
+3.paracetamol:
+	Stock:80
+	rack number:10
+	Supplier:sup1
+	Diseses that can be cured: 
+	[dis1, dis2]
+4.VitaminC:
+	Stock:94
+	rack number:6
+	Supplier:sup3
+	Diseses that can be cured: 
+	[dis1, dis4]
+5.azee:
+	Stock:100
+	rack number:10
+	Supplier:sup2
+	Diseses that can be cured: 
+	[dis1, dis2]
+6.faviparavir:
+	Stock:19
+	rack number:15
+	Supplier:sup3
+	Diseses that can be cured: 
+	[dis1, dis2, dis3]
+7.sinarest:
+	Stock:90
+	rack number:2
+	Supplier:sup1
+	Diseses that can be cured: 
+	[dis1, dis3]
+8.doxycyline100:
+	Stock:89
+	rack number:9
+	Supplier:sup2
+	Diseses that can be cured: 
+	[dis1, dis3]
+9.fabiflue400:
+	Stock:120
+	rack number:5
+	Supplier:sup2
+	Diseses that can be cured: 
+	[Cold, Corona, Fever, dis1]
+9 medicines can cure dis1
+-----------------MENU-----------------
+[1] Add a new Medicine
+[2] Display the Inventory
+[3] Check the Stock of a medicine
+[4] Check the Expiry Date of a medicine in stock
+[5] Search a medicine by Name
+[6] Search a medicine by Disease for which the medicine is required
+[7] Search the medicine by the Supplier Name
+[8] Restock a Medicine
+[9] Remove a Medicine from the Inventory
+[10] Display total sales
+[11] Exit the Menu
+Enter your choice.
+7
+Enter supplier name you want to search:
+sup3
+1.ecospirin:
+	Stock:74
+	Supplier:sup3
+2.VitaminD:
+	Stock:7
+	Supplier:sup3
+3.VitaminC:
+	Stock:94
+	Supplier:sup3
+4.faviparavir:
+	Stock:19
+	Supplier:sup3
+4 medicines are supplied by sup3
+-----------------MENU-----------------
+[1] Add a new Medicine
+[2] Display the Inventory
+[3] Check the Stock of a medicine
+[4] Check the Expiry Date of a medicine in stock
+[5] Search a medicine by Name
+[6] Search a medicine by Disease for which the medicine is required
+[7] Search the medicine by the Supplier Name
+[8] Restock a Medicine
+[9] Remove a Medicine from the Inventory
+[10] Display total sales
+[11] Exit the Menu
+Enter your choice.
+8
+Enter medicine to be restocked: VitaminD
+Enter the quantity added: 20
+Enter expiry date of new stock (dd/mm/yyyy)
+12/12/2022
+Do you want to restock more medicines?
+y
+Enter medicine to be restocked: dexona
+Medicine  not found
+Do you want to add this medicine?
+y
+Enter the name:
+dexona
+Enter the supplier
+sup1
+Enter the price per unit
+67
+Enter the stock
+78
+Enter the location
+16
+Enter expiry date (dd/mm/yyyy): 17/06/2021
+Enter name of disease which can be cured by this medicines
+dis1
+Do you want to enter more diseases
+y
+Enter name of disease which can be cured by this medicines
+dis2
+Do you want to enter more diseases
+n
+Do you want to restock more medicines?
+n
+-----------------MENU-----------------
+[1] Add a new Medicine
+[2] Display the Inventory
+[3] Check the Stock of a medicine
+[4] Check the Expiry Date of a medicine in stock
+[5] Search a medicine by Name
+[6] Search a medicine by Disease for which the medicine is required
+[7] Search the medicine by the Supplier Name
+[8] Restock a Medicine
+[9] Remove a Medicine from the Inventory
+[10] Display total sales
+[11] Exit the Menu
+Enter your choice.
+9
+Enter name you want to delete:
+azee
+Medicine successfully removed from inventory
+
+-----------------MENU-----------------
+[1] Add a new Medicine
+[2] Display the Inventory
+[3] Check the Stock of a medicine
+[4] Check the Expiry Date of a medicine in stock
+[5] Search a medicine by Name
+[6] Search a medicine by Disease for which the medicine is required
+[7] Search the medicine by the Supplier Name
+[8] Restock a Medicine
+[9] Remove a Medicine from the Inventory
+[10] Display total sales
+[11] Exit the Menu
+Enter your choice.
+10
+Total transactions till date
+Customer id	Name	  Bill (Rs.)
+1234		Khushbu	  35
+1235		Aparna	  600
+1236		Hardiki	  160
+1237		Sudha	  325
+1238		Khushi	  300
+1239		Namit	  15
+1240		Shri	  18
+Total revenue generated: (Rs.)1453
+-----------------MENU-----------------
+[1] Add a new Medicine
+[2] Display the Inventory
+[3] Check the Stock of a medicine
+[4] Check the Expiry Date of a medicine in stock
+[5] Search a medicine by Name
+[6] Search a medicine by Disease for which the medicine is required
+[7] Search the medicine by the Supplier Name
+[8] Restock a Medicine
+[9] Remove a Medicine from the Inventory
+[10] Display total sales
+[11] Exit the Menu
+Enter your choice.
+11
+Exiting..
+Choose 0 if you are the Admin. 
+Choose 1 if you are a Customer.
+Enter anything else to EXIT.
+1
+Your customer id for this purchase is: 1241
+Enter name: Saiyami
+Enter contact no.: 1234567890
+Enter address
+asdf lane, nagpur
+Enter name of doctor: dr.Siddhi
+
+
+***Customer Menu***
+[1] Display the Details
+[2] Place order
+[3] Create bill
+[4] Update the quantity of a medicine
+[5] Remove a medicine from the bill
+[6] Check out
+
+Enter your choice.
+1
+Customer id: 1241
+Name: Saiyami
+Contact number:1234567890
+Customer address:  lane, nagpur
+Prescribed by:dr.Siddhi
+
+***Customer Menu***
+[1] Display the Details
+[2] Place order
+[3] Create bill
+[4] Update the quantity of a medicine
+[5] Remove a medicine from the bill
+[6] Check out
+
+Enter your choice.
+2
+Enter the medicines you want to purchase:
+Enter medicine name: paracetamol
+Enter Quantity: 20
+Do you want to purchase more?
+y
+Enter medicine name: tazar
+Enter Quantity: 34
+Medicine  not found
+Do you want to purchase more?
+favipar
+
+***Customer Menu***
+[1] Display the Details
+[2] Place order
+[3] Create bill
+[4] Update the quantity of a medicine
+[5] Remove a medicine from the bill
+[6] Check out
+
+Enter your choice.
+2
+Enter medicine name: VitaminD
+Enter Quantity: 40
+Stock available is 27 only
+Do you want to purchase more?
+y
+Enter medicine name: VitaminD
+Enter Quantity: 12
+Do you want to purchase more?
+y
+Enter medicine name: ecospirin
+Enter Quantity: 20
+Do you want to purchase more?
+y
+Enter medicine name: fabiflue400
+Enter Quantity: 10
+Do you want to purchase more?
+n
+
+***Customer Menu***
+[1] Display the Details
+[2] Place order
+[3] Create bill
+[4] Update the quantity of a medicine
+[5] Remove a medicine from the bill
+[6] Check out
+
+Enter your choice.
+3
+*********************************
+Medicine	Quantity	Price
+paracetamol	  20		700
+VitaminD	  12		120
+ecospirin	  20		200
+fabiflue400	  10		450
+Total Bill		 Rs: 1470 only
+*********************************
+
+***Customer Menu***
+[1] Display the Details
+[2] Place order
+[3] Create bill
+[4] Update the quantity of a medicine
+[5] Remove a medicine from the bill
+[6] Check out
+
+Enter your choice.
+4
+Enter medicine whose quantity is to be updated: fabiflue
+Medicine  not found
+medicine not purchased
+
+***Customer Menu***
+[1] Display the Details
+[2] Place order
+[3] Create bill
+[4] Update the quantity of a medicine
+[5] Remove a medicine from the bill
+[6] Check out
+
+Enter your choice.
+4
+Enter medicine whose quantity is to be updated: fabiflue400
+Enter new quantity: 20
+quantity updated Successfully
+
+***Customer Menu***
+[1] Display the Details
+[2] Place order
+[3] Create bill
+[4] Update the quantity of a medicine
+[5] Remove a medicine from the bill
+[6] Check out
+
+Enter your choice.
+3
+*********************************
+Medicine	Quantity	Price
+paracetamol	  20		700
+VitaminD	  12		120
+ecospirin	  20		200
+fabiflue400	  20		900
+Total Bill		 Rs: 1920 only
+*********************************
+
+***Customer Menu***
+[1] Display the Details
+[2] Place order
+[3] Create bill
+[4] Update the quantity of a medicine
+[5] Remove a medicine from the bill
+[6] Check out
+
+Enter your choice.
+5
+Enter medicine to remove: VitaminD
+medicine removed from bill
+
+***Customer Menu***
+[1] Display the Details
+[2] Place order
+[3] Create bill
+[4] Update the quantity of a medicine
+[5] Remove a medicine from the bill
+[6] Check out
+
+Enter your choice.
+3
+*********************************
+Medicine	Quantity	Price
+paracetamol	  20		700
+ecospirin	  20		200
+fabiflue400	  20		900
+Total Bill		 Rs: 1800 only
+*********************************
+
+***Customer Menu***
+[1] Display the Details
+[2] Place order
+[3] Create bill
+[4] Update the quantity of a medicine
+[5] Remove a medicine from the bill
+[6] Check out
+
+Enter your choice.
+6
+Thank You for Visiting our Store:)
+Choose 0 if you are the Admin. 
+Choose 1 if you are a Customer.
+Enter anything else to EXIT.
+0
+-----------------MENU-----------------
+[1] Add a new Medicine
+[2] Display the Inventory
+[3] Check the Stock of a medicine
+[4] Check the Expiry Date of a medicine in stock
+[5] Search a medicine by Name
+[6] Search a medicine by Disease for which the medicine is required
+[7] Search the medicine by the Supplier Name
+[8] Restock a Medicine
+[9] Remove a Medicine from the Inventory
+[10] Display total sales
+[11] Exit the Menu
+Enter your choice.
+10
+Total transactions till date
+Customer id	Name	  Bill (Rs.)
+1234		Khushbu	  35
+1235		Aparna	  600
+1236		Hardiki	  160
+1237		Sudha	  325
+1238		Khushi	  300
+1239		Namit	  15
+1240		Shri	  18
+1241		Saiyami	  1800
+Total revenue generated: (Rs.)3253
+-----------------MENU-----------------
+[1] Add a new Medicine
+[2] Display the Inventory
+[3] Check the Stock of a medicine
+[4] Check the Expiry Date of a medicine in stock
+[5] Search a medicine by Name
+[6] Search a medicine by Disease for which the medicine is required
+[7] Search the medicine by the Supplier Name
+[8] Restock a Medicine
+[9] Remove a Medicine from the Inventory
+[10] Display total sales
+[11] Exit the Menu
+Enter your choice.
+11
+Exiting..
+Choose 0 if you are the Admin. 
+Choose 1 if you are a Customer.
+Enter anything else to EXIT.
+8
