@@ -54,7 +54,7 @@ This project has been designed for both admin and customer interface.
     a.	void accept (): Accept details of medicine to be purchased.  
     b.	void display (): Display details of the purchased medicine.  
 
-#### **4.	Customer (implements Serializable) **
+#### **4.	Customer (implements Serializable)**
     a.	void accept_customer (): Accepts the details of customer.  
     b.	void display (): Display customer details.  
     c.	void create_customer_bill (): Adds up all the prices of purchased medicine and display bill.  
